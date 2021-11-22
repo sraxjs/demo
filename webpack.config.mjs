@@ -21,7 +21,7 @@ export default function (env, argv) {
                         options: {
                             presets: [
                                 '@babel/preset-env',
-                                Path.join(process.cwd(), '../babel-preset-srax/src/main.mjs')
+                                '@sraxjs/babel-preset-srax'
                             ]
                         }
                     }
