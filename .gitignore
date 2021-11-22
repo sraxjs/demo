@@ -1,0 +1,15 @@
+/*
+.*
+!/package.json
+!/babel.config.json
+!/.gitlab-ci.yml
+!/.gitignore
+!/server/
+!/gulpfile.js
+!/webpack.config.mjs
+!/src/
+!/src/*
+!/typing/
+!/typing/*
+!/tsconfig.json
+.DS_Store
