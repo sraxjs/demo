@@ -38,6 +38,9 @@ const Home = () => {
 
     Hook.effect(() => {
         console.log('dom ready');
+        return () => {
+            console.log('destroy');
+        }
     });
 
     Hook.effect((hello) => {
