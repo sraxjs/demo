@@ -1,59 +1,56 @@
 import { Hook } from '@sraxjs/srax';
 import S from './main.less';
 
-const TextItem = (props, children) => {
-    return (
-        <span date-text={props?.text}>
-            <i>{children}</i>
-        </span>
-    );
-}
+const Hello = () => {
 
-const Hello = (props) => {
-
+    let [context, renderContext] = Hook.context();
     let hello = ['你好', 'Hello', 'こんにちは', '안녕하세요', 'Bonjour', 'Hallo!', 'Здравствый'];
-
-    let [state, setState] = Hook.state({
-        value: hello[0]
-    });
+    let value = hello[0];
 
     setInterval(() => {
 
-        let index = hello.indexOf(state.value) + 1;
+        let index = hello.indexOf(value) + 1;
 
-        setState({
-            value: hello[index >= hello.length ? 0 : index]
-        });
+        value = hello[index >= hello.length ? 0 : index];
+
+        renderContext();
 
     }, 2000);
 
-    return (
-        <TextItem>{state.value + ', '}</TextItem>
-    );
+    return [value];
 
 }
 
 const Home = () => {
 
-    let [state, setState] = Hook.state({
-        date: new Date()
-    });
+    let [context, renderContext] = Hook.context();
+    let [hello] = Hello();
+    let date = new Date();
 
     setInterval(() => {
-        setState({
-            date: new Date()
-        });
+        date = new Date();
+        renderContext();
     }, 1000);
+
+    Hook.effect(() => {
+        console.log('dom update');
+    }, []);
+
+    Hook.effect(() => {
+        console.log('dom ready');
+    });
+
+    Hook.effect((hello) => {
+        console.log('hello: ' + hello);
+    }, [hello]);
 
     return (
         <div class={S.home}>
-            <Hello text={state.date} /><TextItem>Srax!</TextItem>
-            <div class={S.dateTime}>
-                <TextItem text={state.date}>{state.date}</TextItem>
-            </div>
+            <div>{hello}, Srax!</div>
+            <div class={S.dateTime}>{date}</div>
         </div>
     );
 
-};
+}
 
 export default Home;

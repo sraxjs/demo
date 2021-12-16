@@ -1,4 +1,4 @@
-import { Srax } from '@sraxjs/srax';
+import { DOM } from '@sraxjs/srax';
 import Home from './application/home/main';
 
-Srax.DOM.render(<Home />, document.body);
+DOM.render(<Home />, document.body);
